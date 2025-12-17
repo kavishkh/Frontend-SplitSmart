@@ -21,6 +21,9 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login, signup, isAuthenticated } = useAuth();
+  
+  // Define API base URL constant
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   // Check for Google OAuth success on component mount
   useEffect(() => {
@@ -264,7 +267,7 @@ export default function Login() {
                       className="w-full"
                       onClick={() => {
                         // Directly redirect to Google OAuth using the correct backend URL
-                        window.location.href = import.meta.env.VITE_API_BASE_URL + '/auth/google';
+                        window.location.href = `${API_BASE}/auth/google`;
                       }}
                     >
                       <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">

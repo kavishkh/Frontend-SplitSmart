@@ -27,6 +27,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
+  
+  // Define API base URL constant
+  const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
     // Check if user is authenticated (check token in localStorage)
@@ -39,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsAuthenticated(true);
     } else {
       // Check if user is authenticated via session (Google OAuth)
-      fetch(import.meta.env.VITE_API_BASE_URL + '/auth/session')
+      fetch(`${API_BASE}/auth/session`)
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -81,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Call the backend login API
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/login', {
+      const response = await fetch(`${API_BASE}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +171,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Create user through the API
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/users', {
+      const response = await fetch(`${API_BASE}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -224,7 +227,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     try {
       // Call the backend logout endpoint to destroy the session
-      await fetch(import.meta.env.VITE_API_BASE_URL + '/auth/logout', {
+      await fetch(`${API_BASE}/auth/logout`, {
         method: 'POST',
         credentials: 'include' // Include cookies in the request
       });
@@ -243,7 +246,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const forgotPassword = async (email: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/forgot-password', {
+      const response = await fetch(`${API_BASE}/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -266,7 +269,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   
   const verifyOTP = async (email: string, otp: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/verify-otp', {
+      const response = await fetch(`${API_BASE}/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -294,7 +297,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('OTP length:', otp.length);
       console.log('New password length:', newPassword.length);
       
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/reset-password', {
+      const response = await fetch(`${API_BASE}/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
