@@ -3,7 +3,7 @@
 
 export default async function handler(request, response) {
   // Get the backend URL from environment variables or use default
-  const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
+  const BACKEND_URL = process.env.BACKEND_URL || 'https://backend-split-smart.onrender.com';
   
   // Extract the path from the request
   const { path } = request.query;
