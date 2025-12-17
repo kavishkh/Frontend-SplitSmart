@@ -263,8 +263,8 @@ export default function Login() {
                       variant="outline" 
                       className="w-full"
                       onClick={() => {
-                        // Directly redirect to Google OAuth
-                        window.location.href = '/auth/google';
+                        // Directly redirect to Google OAuth using the correct backend URL
+                        window.location.href = import.meta.env.VITE_API_BASE_URL + '/auth/google';
                       }}
                     >
                       <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24">

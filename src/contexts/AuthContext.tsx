@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsAuthenticated(true);
     } else {
       // Check if user is authenticated via session (Google OAuth)
-      fetch('/api/auth/session')
+      fetch(import.meta.env.VITE_API_BASE_URL + '/auth/session')
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -81,7 +81,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Call the backend login API
-      const response = await fetch('/api/login', {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Create user through the API
-      const response = await fetch('/api/users', {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -224,7 +224,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     try {
       // Call the backend logout endpoint to destroy the session
-      await fetch('/api/auth/logout', {
+      await fetch(import.meta.env.VITE_API_BASE_URL + '/auth/logout', {
         method: 'POST',
         credentials: 'include' // Include cookies in the request
       });
@@ -243,7 +243,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const forgotPassword = async (email: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch('/api/forgot-password', {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -266,7 +266,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   
   const verifyOTP = async (email: string, otp: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch('/api/verify-otp', {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/verify-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -294,7 +294,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('OTP length:', otp.length);
       console.log('New password length:', newPassword.length);
       
-      const response = await fetch('/api/reset-password', {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + '/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
