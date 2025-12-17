@@ -37,6 +37,9 @@ coverage/
 .env.production.local
 .env.production
 
+# Documentation files
+DEPLOYMENT.md
+
 # IDEs and editors
 .vscode/
 .idea/
