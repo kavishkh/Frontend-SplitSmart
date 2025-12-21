@@ -7,6 +7,8 @@ export default defineConfig({
   server: {
     host: "::",
     port: 5173, // Use port 5173 for frontend
+    strictPort: true,
+    origin: "https://frontend-splitsmart.onrender.com",
   },
   plugins: [react()],
   resolve: {
