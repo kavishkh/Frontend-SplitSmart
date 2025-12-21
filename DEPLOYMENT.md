@@ -1,35 +1,48 @@
-# Deployment Instructions for SplitSmart Frontend
+# Frontend Deployment Configuration
 
-## Vercel Deployment with External Backend
+## Environment Variables
 
-This application is configured to work with an external backend deployed at `https://backend-split-smart.onrender.com`.
+The frontend application uses the following environment variables:
 
-## Environment Variables Setup
+- `VITE_API_BASE_URL`: The base URL for API requests (defaults to your deployed backend)
 
-When deploying to Vercel, you need to set the following environment variables in your Vercel project dashboard:
+These variables are configured in:
+- `.env` - For development
+- `.env.production` - For production
 
-1. Go to your Vercel project dashboard
-2. Navigate to Settings > Environment Variables
-3. Add these environment variables:
+Both files are already configured to use your deployed backend at `https://backend-split-smart.onrender.com`.
 
-```
-VITE_BACKEND_URL=https://backend-split-smart.onrender.com
-VITE_API_BASE_URL=https://backend-split-smart.onrender.com
-```
+## Deployment to Render
 
-## How It Works
+The frontend is configured to be deployed as a static site to Render. The build process will:
 
-- In development: The app uses `/api` as the base URL which gets proxied to `http://localhost:3000` via Vite's proxy configuration
-- In production: The app uses the full backend URL directly (`https://backend-split-smart.onrender.com`)
+1. Install dependencies with `npm install`
+2. Build the application with `npm run build`
+3. Serve the built files from the `dist` directory
 
-## File Structure
+## API Configuration
 
-- `.env` - Development environment variables
-- `.env.production` - Production environment variables (not committed to repo)
-- `.env.example` - Example environment variables for reference
+The frontend makes API requests to your deployed backend. All API calls are prefixed with the `VITE_API_BASE_URL` environment variable.
 
-## Notes
+For example:
+- A request to `/api/users` will be sent to `https://backend-split-smart.onrender.com/users`
 
-- Never commit actual environment files (especially `.env.production`) to the repository
-- The `.vercelignore` file ensures environment files are not included in the deployment
-- Environment variables should always be set in the Vercel dashboard for security
+## CORS Configuration
+
+The backend is configured to handle CORS requests, so there should be no issues with cross-origin requests from the frontend.
+
+## Troubleshooting
+
+If you encounter issues with API requests:
+
+1. Verify that the backend is running at `https://backend-split-smart.onrender.com`
+2. Check that the environment variables are correctly set
+3. Ensure that the backend MongoDB connection is working
+4. Check the browser's developer console for any error messages
+
+## Updating the Backend URL
+
+If you need to change the backend URL:
+
+1. Update the `VITE_API_BASE_URL` variable in both `.env` and `.env.production` files
+2. Redeploy the frontend application

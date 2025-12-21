@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://backend-split-smart.onrender.com';
 
 // Generic API call function with better error handling
 const apiCall = async (endpoint, options = {}) => {
