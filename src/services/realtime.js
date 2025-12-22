@@ -1,8 +1,7 @@
 import { io } from 'socket.io-client';
 
 // Create Socket.IO client connection
-const SOCKET_URL = 'http://localhost:40001';
-
+const SOCKET_URL = import.meta.env.VITE_API_BASE_URL || 'https://backend-split-smart.onrender.com';
 class RealtimeService {
   constructor() {
     this.socket = null;
@@ -18,7 +17,7 @@ class RealtimeService {
     }
 
     this.socket = io(SOCKET_URL, {
-      transports: ['websocket', 'polling'],
+      transports: ['websocket'],
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 1000,

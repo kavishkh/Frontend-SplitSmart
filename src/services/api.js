@@ -58,15 +58,13 @@ const apiCall = async (endpoint, options = {}) => {
 
 // User API functions
 export const userAPI = {
-  getAll: () => apiCall('/users'),
-  create: (userData) => apiCall('/users', {
+  getAll: () => apiCall('/api/users'),
+  create: (userData) => apiCall('/api/users', {
     method: 'POST',
     body: JSON.stringify(userData),
   }),
-  getById: (id) => apiCall(`/users/${id}`),
-};
-
-// Group API functions
+  getById: (id) => apiCall(`/api/users/${id}`),
+};// Group API functions
 export const groupAPI = {
   getAll: () => {
     // Get user ID from localStorage for demo purposes
@@ -83,21 +81,21 @@ export const groupAPI = {
       }
     }
     
-    return apiCall(`/groups?userId=${encodeURIComponent(userId)}`);
+    return apiCall(`/api/groups?userId=${encodeURIComponent(userId)}`);
   },
-  create: (groupData) => apiCall('/groups', {
+  create: (groupData) => apiCall('/api/groups', {
     method: 'POST',
     body: JSON.stringify(groupData),
   }),
-  getById: (id) => apiCall(`/groups/${id}`),
-  update: (id, groupData) => apiCall(`/groups/${id}`, {
+  getById: (id) => apiCall(`/api/groups/${id}`),
+  update: (id, groupData) => apiCall(`/api/groups/${id}`, {
     method: 'PUT',
     body: JSON.stringify(groupData),
   }),
-  delete: (id) => apiCall(`/groups/${id}`, {
+  delete: (id) => apiCall(`/api/groups/${id}`, {
     method: 'DELETE',
   }),
-  acceptInvitation: (id, email) => apiCall(`/groups/${id}/accept-invitation`, {
+  acceptInvitation: (id, email) => apiCall(`/api/groups/${id}/accept-invitation`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -105,7 +103,7 @@ export const groupAPI = {
     body: JSON.stringify({ email }),
   }),
   // Add function for sending invitation emails
-  sendInvitation: (invitationData) => apiCall('/send-invite', {
+  sendInvitation: (invitationData) => apiCall('/api/send-invite', {
     method: 'POST',
     body: JSON.stringify(invitationData),
   }),
@@ -128,9 +126,9 @@ export const expenseAPI = {
       }
     }
     
-    return apiCall(`/expenses?userId=${encodeURIComponent(userId)}`);
+    return apiCall(`/api/expenses?userId=${encodeURIComponent(userId)}`);
   },
-  create: (expenseData) => apiCall('/expenses', {
+  create: (expenseData) => apiCall('/api/expenses', {
     method: 'POST',
     body: JSON.stringify(expenseData),
   }),
@@ -149,13 +147,13 @@ export const expenseAPI = {
       }
     }
     
-    return apiCall(`/expenses/group/${groupId}?userId=${encodeURIComponent(userId)}`);
+    return apiCall(`/api/expenses/group/${groupId}?userId=${encodeURIComponent(userId)}`);
   },
-  update: (id, expenseData) => apiCall(`/expenses/${id}`, {
+  update: (id, expenseData) => apiCall(`/api/expenses/${id}`, {
     method: 'PUT',
     body: JSON.stringify(expenseData),
   }),
-  delete: (id) => apiCall(`/expenses/${id}`, {
+  delete: (id) => apiCall(`/api/expenses/${id}`, {
     method: 'DELETE',
   }),
 };
@@ -177,7 +175,7 @@ export const settlementAPI = {
       }
     }
     
-    return apiCall(`/settlements?userId=${encodeURIComponent(userId)}`);
+    return apiCall(`/api/settlements?userId=${encodeURIComponent(userId)}`);
   },
   getByGroup: (groupId) => {
     // Get user ID from localStorage for demo purposes
@@ -194,23 +192,23 @@ export const settlementAPI = {
       }
     }
     
-    return apiCall(`/settlements/group/${groupId}?userId=${encodeURIComponent(userId)}`);
+    return apiCall(`/api/settlements/group/${groupId}?userId=${encodeURIComponent(userId)}`);
   },
-  create: (settlementData) => apiCall('/settlements', {
+  create: (settlementData) => apiCall('/api/settlements', {
     method: 'POST',
     body: JSON.stringify(settlementData),
   }),
-  confirm: (id) => apiCall(`/settlements/${id}/confirm`, {
+  confirm: (id) => apiCall(`/api/settlements/${id}/confirm`, {
     method: 'PATCH',
   }),
-  delete: (id) => apiCall(`/settlements/${id}`, {
+  delete: (id) => apiCall(`/api/settlements/${id}`, {
     method: 'DELETE',
   }),
 };
 
 // Health check
 export const healthAPI = {
-  check: () => apiCall('/health'),
+  check: () => apiCall('/api/health'),
 };
 
 export default {

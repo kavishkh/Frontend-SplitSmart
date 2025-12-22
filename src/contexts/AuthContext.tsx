@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsAuthenticated(true);
     } else {
       // Check if user is authenticated via session (Google OAuth)
-      fetch(`${API_BASE}/auth/session`)
+      fetch(`${API_BASE}/api/auth/session`)
         .then(response => {
           if (response.ok) {
             return response.json();
@@ -84,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Call the backend login API
-      const response = await fetch(`${API_BASE}/login`, {
+      const response = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(true);
     try {
       // Create user through the API
-      const response = await fetch(`${API_BASE}/users`, {
+      const response = await fetch(`${API_BASE}/api/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -227,7 +227,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = async () => {
     try {
       // Call the backend logout endpoint to destroy the session
-      await fetch(`${API_BASE}/auth/logout`, {
+      await fetch(`${API_BASE}/api/auth/logout`, {
         method: 'POST',
         credentials: 'include' // Include cookies in the request
       });
@@ -246,7 +246,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const forgotPassword = async (email: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch(`${API_BASE}/forgot-password`, {
+      const response = await fetch(`${API_BASE}/api/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   
   const verifyOTP = async (email: string, otp: string): Promise<{ success: boolean; message?: string }> => {
     try {
-      const response = await fetch(`${API_BASE}/verify-otp`, {
+      const response = await fetch(`${API_BASE}/api/verify-otp`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -297,7 +297,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       console.log('OTP length:', otp.length);
       console.log('New password length:', newPassword.length);
       
-      const response = await fetch(`${API_BASE}/reset-password`, {
+      const response = await fetch(`${API_BASE}/api/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
